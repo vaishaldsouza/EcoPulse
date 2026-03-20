@@ -18,6 +18,14 @@ const IssueSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  severity: {
+    type: String,
+    enum: ['Low', 'Moderate', 'High', 'Critical'],
+    default: 'Moderate'
+  },
+  environmentalImpact: {
+    type: String  // e.g., "Affects local water table", "Wildlife risk"
+  },
   description: {
     type: String,
     required: true

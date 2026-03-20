@@ -26,10 +26,10 @@ function App() {
     <IssueProvider>
       <AuthProvider>
         <Router>
-          <div className="min-h-screen bg-gray-50 flex flex-col">
+          <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex flex-col">
             <AuthRedirect />
             <Navbar />
-            <main className="flex-grow">
+            <main className="flex-grow bg-white dark:bg-gray-900">
               <Routes>
                 <Route path="/" element={<LandingPage />} />
                 <Route path="/home" element={<Home />} />
