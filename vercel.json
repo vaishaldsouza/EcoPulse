@@ -2,7 +2,7 @@
     "rewrites": [
         {
             "source": "/api/:path*",
-            "destination": "https://civic-pulse-api-s07o.onrender.com/api/:path*"
+            "destination": "https://ecopulse-backend-7x2c.onrender.com/api/:path*"
         },
         {
             "source": "/(.*)",
