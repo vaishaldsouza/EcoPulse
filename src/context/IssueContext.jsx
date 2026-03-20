@@ -9,7 +9,7 @@ export function IssueProvider({ children }) {
     const [error, setError] = useState(null);
 
     // Get API URL from environment variables or fallback to localhost
-    const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+    const API_URL = import.meta.env.VITE_API_URL || '';
 
     // Fetch issues from backend
     useEffect(() => {

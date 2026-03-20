@@ -30,7 +30,7 @@ export default function Impact() {
   useEffect(() => {
     const fetchImpactData = async () => {
       try {
-        const res = await fetch('http://localhost:5000/api/issues/all');
+        const res = await fetch('/api/issues/all');
         const data = await res.json();
 
         const resolved = data.filter(r => r.status === 'Resolved');

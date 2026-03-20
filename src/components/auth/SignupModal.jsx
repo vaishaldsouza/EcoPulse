@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { Eye, EyeOff, Leaf, ShieldCheck } from 'lucide-react';
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+const API_URL = import.meta.env.VITE_API_URL || '';
 
 function getPasswordStrength(password) {
   if (!password) return null;
@@ -81,10 +81,13 @@ export default function Signup() {
   };
 
   const inputClass = (field) =>
-    `w-full p-4 bg-gray-50 border rounded-2xl outline-none transition-all text-sm
+    `w-full p-4 rounded-2xl outline-none transition-all text-sm
+    bg-white dark:bg-gray-800
+    text-gray-900 dark:text-white
+    placeholder-gray-400 dark:placeholder-gray-500
     ${fieldErrors[field]
-      ? 'border-red-400 focus:ring-2 focus:ring-red-300'
-      : 'border-gray-200 focus:ring-2 focus:ring-green-400'}`;
+      ? 'border border-red-400 focus:ring-2 focus:ring-red-300'
+      : 'border border-gray-200 dark:border-gray-600 focus:ring-2 focus:ring-green-400 dark:focus:ring-green-500'}`;
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-50 to-emerald-50 px-4 py-10">
