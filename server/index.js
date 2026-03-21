@@ -21,12 +21,20 @@ const allowedOrigins = [
   'http://localhost:3000',
   'http://127.0.0.1:5173',
   'http://127.0.0.1:5174',
-  process.env.FRONTEND_URL
+  process.env.FRONTEND_URL,
+  'https://ecopulse-frontend.vercel.app'
 ].filter(Boolean);
 
 app.use(cors({
   origin: (origin, cb) => {
-    if (!origin || allowedOrigins.includes(origin)) return cb(null, true);
+    // Allow no origin for mobile apps, curl, etc.
+    if (!origin) return cb(null, true);
+    
+    // Check if origin is in allowed list
+    if (allowedOrigins.includes(origin)) return cb(null, true);
+    
+    // Log the blocked origin for debugging
+    console.log('CORS blocked origin:', origin);
     cb(new Error('Not allowed by CORS'));
   },
   credentials: true
