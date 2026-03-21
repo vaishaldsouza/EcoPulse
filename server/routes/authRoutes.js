@@ -37,26 +37,32 @@ router.post('/register', async (req, res) => {
 
 router.post('/login', async (req, res) => {
   try {
+    console.log('Login request received:', req.body);
     const { email, password } = req.body;
     if (!email || !password) {
+      console.log('Missing email or password');
       return res.status(400).json({ msg: "Email and password are required" });
     }
     const user = await User.findOne({ email });
     if (!user) {
+      console.log('User not found:', email);
       return res.status(400).json({ msg: "Invalid credentials" });
     }
 
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
+      console.log('Password mismatch for:', email);
       return res.status(400).json({ msg: "Invalid credentials" });
     }
 
-    res.json({
+    const userData = {
       _id: user._id,
       name: user.name,
       email: user.email,
       role: user.role
-    });
+    };
+    console.log('Login successful for:', email);
+    res.json(userData);
   } catch (err) {
     console.error('Login error:', err.message);
     res.status(500).json({ msg: "Login failed" });

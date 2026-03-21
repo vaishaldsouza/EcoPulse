@@ -21,24 +21,37 @@ export default function Login() {
     setError('');
     setIsSubmitting(true);
     try {
+      console.log('Sending login request:', formData);
       const res = await fetch(`/api/auth/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
       });
+      console.log('Response status:', res.status);
+      console.log('Response headers:', res.headers);
+      
       let data;
-      try { data = await res.json(); }
-      catch { setError('Invalid response from server'); return; }
+      try { 
+        data = await res.json(); 
+        console.log('Response data:', data);
+      } catch (err) { 
+        console.error('JSON parse error:', err);
+        setError('Invalid response from server'); 
+        return; 
+      }
 
       if (res.ok) {
         const role   = data.role === 'Admin' ? 'Admin' : 'Community';
         const target = role === 'Admin' ? '/admin' : '/dashboard';
+        console.log('Login successful, navigating to:', target);
         flushSync(() => login({ ...data, role }));
         navigate(target, { replace: true });
       } else {
+        console.log('Login failed:', data.msg);
         setError(data.msg || 'Invalid credentials');
       }
     } catch (err) {
+      console.error('Network error:', err);
       setError('Could not connect to server. Is the backend running?');
     } finally {
       setIsSubmitting(false);
