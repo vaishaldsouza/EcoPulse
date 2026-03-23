@@ -22,7 +22,8 @@ const allowedOrigins = [
   'http://127.0.0.1:5173',
   'http://127.0.0.1:5174',
   process.env.FRONTEND_URL,
-  'https://ecopulse-frontend.vercel.app'
+  'https://ecopulse-frontend.vercel.app',
+  'https://eco-pulse-six.vercel.app'
 ].filter(Boolean);
 
 app.use(cors({
